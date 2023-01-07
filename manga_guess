@@ -1,0 +1,41 @@
+import random
+
+# List of manga titles
+manga_titles = ["One Piece", "Naruto", "Dragon Ball Z", "Attack on Titan", "Death Note"]
+
+# Choose a random manga title from the list
+manga = random.choice(manga_titles)
+
+# Create a list of underscores to represent the letters in the chosen manga title
+guess = ["_" for i in manga]
+
+# Initialize the number of guesses
+guesses = 0
+
+# Start the game loop
+while True:
+  # Print the current state of the guess
+  print(" ".join(guess))
+
+  # Prompt the user to enter a letter
+  letter = input("Guess a letter: ")
+
+  # Check if the letter is in the chosen manga title
+  if letter in manga:
+    # If the letter is in the manga title, update the guess with the correct letter
+    for i in range(len(manga)):
+      if manga[i] == letter:
+        guess[i] = letter
+
+    # Check if the user has successfully guessed the entire manga title
+    if "_" not in guess:
+      print("You guessed it! The manga was {}".format(manga))
+      break
+  else:
+    # If the letter is not in the manga title, increment the number of guesses
+    guesses += 1
+
+    # If the user has made too many incorrect guesses, end the game
+    if guesses == 5:
+      print("Sorry, you lost. The manga was {}".format(manga))
+      break
